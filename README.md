@@ -1,6 +1,6 @@
 # AxiomaTask
 
-## Usage
+## Naudojimas
 
 Importuoti failą tada atlikti paiešką. Komandų seka:
 1. import -r Path 
