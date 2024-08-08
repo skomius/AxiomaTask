@@ -1,6 +1,7 @@
 ﻿using AxiomaTask.Models;
 using CsvHelper;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -25,6 +26,8 @@ namespace AxiomaTask
                     LogsCollection.LogsRecords.Add(record);
                 }
             }
+
+            LogsCollection.LogsRecords = LogsCollection.LogsRecords.Distinct(new RecordsComparer()).ToList();
         }
     }
 }

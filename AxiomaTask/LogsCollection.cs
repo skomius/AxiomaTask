@@ -10,6 +10,6 @@ namespace AxiomaTask
 {
     static internal class LogsCollection
     {
-        internal static BlockingCollection<Record> LogsRecords = new BlockingCollection<Record>();
+        internal static List<Record> LogsRecords = new List<Record>();
     }
 }
