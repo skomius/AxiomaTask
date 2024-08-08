@@ -1,9 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using AxiomaTask;
 using CommandLine;
-using CsvHelper;
-using System.Globalization;
-using System.Linq.Expressions;
 using Newtonsoft.Json;
 
 string[] line = ["--help"];
@@ -17,6 +14,10 @@ while (true)
 int Search(SearchOptions searchOption)
 {
     var searchResult = Searcher.Search(searchOption.Query, QParser.QueryParser);
+    if (searchResult == null)
+    {
+        return 0;
+    }
 
     Console.WriteLine(JsonConvert.SerializeObject(searchResult, Formatting.Indented));
 
