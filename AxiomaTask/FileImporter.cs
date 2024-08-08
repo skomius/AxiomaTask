@@ -1,5 +1,7 @@
-﻿using AxiomaTask.Models;
+﻿using AxiomaTask.Dto;
+using AxiomaTask.Models;
 using CsvHelper;
+using Newtonsoft.Json;
 using System.Globalization;
 
 namespace AxiomaTask
@@ -22,7 +24,7 @@ namespace AxiomaTask
 
                         if (record.severity <= minSeverity)
                         {
-                            Console.WriteLine(record.ToString());
+                            Console.WriteLine(JsonConvert.SerializeObject(record, Formatting.Indented));
                         }
                     }
                 }
