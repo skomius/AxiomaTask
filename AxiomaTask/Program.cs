@@ -26,7 +26,7 @@ int Search(SearchOptions searchOption)
 
 int ImportFile(ImportOptions importOptions)
 {
-    FileImporter.ImportFile(importOptions.Path);
+    FileImporter.ImportFile(importOptions.Path, importOptions.Severity);
     Console.WriteLine("File imported successfully");
     return 0;
 }

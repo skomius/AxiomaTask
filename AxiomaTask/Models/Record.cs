@@ -15,7 +15,7 @@ namespace AxiomaTask.Models
         public string deviceProduct { get; set; }
         public string deviceVersion { get; set; }
         public string signatureId { get; set; }
-        public string severity { get; set; }
+        public int severity { get; set; }
         public string name { get; set; }
         public string start { get; set; }
         public string rt { get; set; }
