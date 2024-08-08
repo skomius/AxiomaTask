@@ -2,7 +2,7 @@
 
 ## Naudojimas
 
-Importuoti failą tada atlikti paiešką. Komandų seka:
+Importuoti failą ir tada atlikti paiešką. Komandų seka:
 1. import -r Path 
 2. search -q Property='value' 
 
