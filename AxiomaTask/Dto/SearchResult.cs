@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AxiomaTask.Models;
 
-namespace AxiomaTask
+namespace AxiomaTask.Dto
 {
     public class SearchResult
     {

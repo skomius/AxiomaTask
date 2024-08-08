@@ -7,14 +7,14 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AxiomaTask
+namespace AxiomaTask.Models
 {
     public class Record
     {
-        public string deviceVendor { get; set;}
-        public string deviceProduct { get; set;}
-        public string deviceVersion { get; set;}
-        public string signatureId { get; set;}
+        public string deviceVendor { get; set; }
+        public string deviceProduct { get; set; }
+        public string deviceVersion { get; set; }
+        public string signatureId { get; set; }
         public string severity { get; set; }
         public string name { get; set; }
         public string start { get; set; }
