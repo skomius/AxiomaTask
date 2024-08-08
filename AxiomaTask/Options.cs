@@ -26,7 +26,7 @@ namespace AxiomaTask
     {
 
         [Option('r', "read", Required = true, HelpText = "Path to file ready to import")]
-        public required string Path { get; set; }
+        public required IEnumerable<string> Path { get; set; }
 
         [Option('n', "notify", Required = false, HelpText = "Lowest severity level to notify")]
         public required int Severity { get; set; }

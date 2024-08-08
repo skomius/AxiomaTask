@@ -30,12 +30,11 @@ namespace AxiomaTask
 
             if (bool.TryParse(field.Value, out boolOut))
             {
-                Expression<Func<bool, bool>> expr = (x) => x == boolOut;
-                return new ParseResult { };
+                return new ParseResult { Value = boolOut, Property = field.Property };
             }
             else if (field.Value.StartsWith('\'') && field.Value.EndsWith('\''))
             {
-                return new ParseResult { Expr = ValueParser(field.Value), Property = field.Property };
+                return new ParseResult { Value = field.Value, Expr = ValueParser(field.Value), Property = field.Property };
             }
             else
             {

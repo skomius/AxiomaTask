@@ -9,6 +9,7 @@ namespace AxiomaTask.Models
 {
     internal class ParseResult
     {
+        internal object Value  { get; set; }
         internal Func<string, bool> Expr { get; set; }
         internal string Property { get; set; }
     }

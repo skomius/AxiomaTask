@@ -6,21 +6,24 @@ namespace AxiomaTask
 {
     internal class FileImporter
     {
-        static internal void ImportFile(string path, int minSeverity = int.MaxValue)
+        static internal void ImportFile(IEnumerable<string> paths, int minSeverity = int.MaxValue)
         {
-            using (var reader = new StreamReader(path))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            foreach (var path in paths)
             {
-                csv.Read();
-                csv.ReadHeader();
-                while (csv.Read())
+                using (var reader = new StreamReader(path))
+                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
-                    var record = csv.GetRecord<Record>();
-                    LogsCollection.LogsRecords.Add(record);
-
-                    if (record.severity <= minSeverity)
+                    csv.Read();
+                    csv.ReadHeader();
+                    while (csv.Read())
                     {
-                        Console.WriteLine(record.ToString());
+                        var record = csv.GetRecord<Record>();
+                        LogsCollection.LogsRecords.Add(record);
+
+                        if (record.severity <= minSeverity)
+                        {
+                            Console.WriteLine(record.ToString());
+                        }
                     }
                 }
             }

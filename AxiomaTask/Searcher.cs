@@ -25,7 +25,20 @@ namespace AxiomaTask
                 return null;
             }
 
-            var results = LogsCollection.LogsRecords.Where(r => parserResult.Expr((string)typeof(Record).GetProperty(parserResult.Property)?.GetValue(r))).ToArray();
+            Record[] results;
+
+            if (parserResult.Value is string)
+            {
+                results = LogsCollection.LogsRecords.Where(r => parserResult.Expr((string)typeof(Record).GetProperty(parserResult.Property)?.GetValue(r))).ToArray();
+            }
+            else if (parserResult.Value is bool)
+            {
+                results = LogsCollection.LogsRecords.Where(r => (bool)typeof(Record).GetProperty(parserResult.Property)?.GetValue(r) == (bool)parserResult.Value).ToArray();
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
 
             return
                 new SearchResult
