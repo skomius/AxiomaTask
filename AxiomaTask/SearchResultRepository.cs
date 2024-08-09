@@ -12,7 +12,8 @@ namespace AxiomaTask
     {
         internal SearchResult AddSearchResult(SearchResult searchResult, SearchDBContext dBContext) 
         {
-            var entity = dBContext.Add(searchResult).Entity;
+            var entity = dBContext.SearchResults.Add(searchResult).Entity;
+            dBContext.SaveChanges();
             return entity;
         }
     }
