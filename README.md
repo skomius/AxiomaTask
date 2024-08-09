@@ -8,4 +8,4 @@ Importuoti failą ir tada atlikti paiešką. Komandų seka:
 
 ## Savybės
 Programa palaiko daugiau negu vieno failo importą, apsaugą nuo dublikatų, pranešimus pagal log severity, rodo rezultato įrašų skaičių, boolean duomenų tipo palaikymas, 
-filtruoja pagal dalį įrašo ('*value*'), įrašo pradžią ('value*'), pabaigą('*value'), rezultatų pateikimą JSON formatu.
+filtruoja pagal dalį įrašo ('*value*'), įrašo pradžią ('value*'), pabaigą('*value'), rezultatų pateikimą JSON formatu, persistence layeris paieškos rezultatams saugoti.
