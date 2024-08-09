@@ -11,10 +11,10 @@ namespace AxiomaTask.Models
 {
     public class Record
     {
+        public string signatureId { get; set; }
         public string deviceVendor { get; set; }
         public string deviceProduct { get; set; }
         public string deviceVersion { get; set; }
-        public string signatureId { get; set; }
         public int severity { get; set; }
         public string name { get; set; }
         public string start { get; set; }
