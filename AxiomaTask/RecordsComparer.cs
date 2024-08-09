@@ -26,7 +26,8 @@ namespace AxiomaTask
 
         public int GetHashCode(Record value)
         {
-            if (Object.ReferenceEquals(value, null)) return 0;
+            if (object.ReferenceEquals(value, null)) 
+                return 0;
 
             int hashsmac = value.smac == null ? 0 : value.smac.GetHashCode();
             int hashstart = value.start == null ? 0 : value.start.GetHashCode();

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AxiomaTask.Dto;
 using AxiomaTask.Models;
+using AxiomaTask.ValueObjects;
 
 namespace AxiomaTask
 {
