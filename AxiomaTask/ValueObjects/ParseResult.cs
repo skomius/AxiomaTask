@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace AxiomaTask.ValueObjects
 {
-    internal class ParseResult
+    public class ParseResult
     {
-        internal object Value { get; set; }
-        internal Func<string, bool> Expr { get; set; }
-        internal string Property { get; set; }
+        public object Value { get; set; }
+        public  Operator Operator { get; set; }
+        public string Property { get; set; }
     }
 }

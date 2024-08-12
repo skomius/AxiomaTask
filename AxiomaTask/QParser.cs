@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using AxiomaTask.ValueObjects;
+using Newtonsoft.Json.Linq;
 
 namespace AxiomaTask
 {
@@ -30,11 +31,12 @@ namespace AxiomaTask
 
             if (bool.TryParse(field.Value, out boolOut))
             {
-                return new ParseResult { Value = boolOut, Property = field.Property };
+                return new ParseResult { Value = boolOut, Operator = Operator.Equals, Property = field.Property };
             }
             else if (field.Value.StartsWith('\'') && field.Value.EndsWith('\''))
             {
-                return new ParseResult { Value = field.Value, Expr = ValueParser(field.Value), Property = field.Property };
+                var valueNoQuotes = field.Value.Trim('\'');
+                return new ParseResult { Value = valueNoQuotes.Trim('*'), Operator = ValueParser(valueNoQuotes), Property = field.Property };
             }
             else
             {
@@ -42,20 +44,17 @@ namespace AxiomaTask
             }
         }
 
-        static private Func<string, bool> ValueParser(string value)
+        static Operator ValueParser(string value)
         {
-            var valueNoQuotes = value.Trim('\'');
-            var valueNoAsterisk = valueNoQuotes.Trim('*');
-
-            Func<string, bool> expr = (valueNoQuotes.StartsWith('*'), valueNoQuotes.EndsWith('*')) switch
+            Operator opr = (value.StartsWith('*'), value.EndsWith('*')) switch
             {
-                (false, false) => x => x == valueNoQuotes,
-                (true, false) => x => x.EndsWith(valueNoAsterisk),
-                (false, true) => x => x.StartsWith(valueNoAsterisk),
-                (true, true) => x => x.Contains(valueNoAsterisk)
+                (false, false) => Operator.Equals,
+                (true, false) => Operator.EndsWith,
+                (false, true) => Operator.StartsWith,
+                (true, true) => Operator.Contains
             };
 
-            return expr;
+            return opr;
         }
     }
 }
