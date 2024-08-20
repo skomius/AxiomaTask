@@ -106,7 +106,4 @@ namespace AxiomaTask
         StartsWith,
         EndsWith
     }
-
-    //var predicate = ExpressionBuilder.GetExpression<Consumer>(filters);
-    //var query = Consumer.Where(predicate).ToList();
 }
