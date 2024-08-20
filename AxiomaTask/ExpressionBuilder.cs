@@ -1,4 +1,5 @@
-﻿using AxiomaTask.ValueObjects;
+﻿using AxiomaTask.Interface;
+using AxiomaTask.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,16 @@ using System.Threading.Tasks;
 
 namespace AxiomaTask
 {
-    public static class ExpressionBuilder
+    public class ExpressionBuilder: IExpressionBuilder
     {
         private static readonly MethodInfo containsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) });
         private static readonly MethodInfo toLowerMethod = typeof(string).GetMethod("ToLower", new Type[0] { });
         private static readonly MethodInfo endsWithMethod = typeof(string).GetMethod("EndsWith", new[] { typeof(string) });
         private static readonly MethodInfo startsWithMethod = typeof(string).GetMethod("StartsWith", new[] { typeof(string) });
 
-        
-        public static Func<T, bool> GetExpression<T>(IList<ParseResult> filters)
+        public ExpressionBuilder() { }
+
+        public Func<T, bool> GetExpression<T>(IList<ParseResult> filters)
         {
             
             ParameterExpression parameter = Expression.Parameter(typeof(T), "t");

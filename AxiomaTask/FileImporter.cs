@@ -1,4 +1,5 @@
 ﻿using AxiomaTask.Dto;
+using AxiomaTask.Interface;
 using AxiomaTask.Models;
 using CsvHelper;
 using Microsoft.Extensions.Configuration;
@@ -7,9 +8,16 @@ using System.Globalization;
 
 namespace AxiomaTask
 {
-    internal class FileImporter
+    public class FileImporter: IFileImporter
     {
-        static internal void ImportFile(IEnumerable<string> paths, int minSeverity = int.MaxValue)
+        private readonly ILogsCollection _logsCollection;
+
+        public FileImporter( ILogsCollection logsCollection )  
+        {
+            _logsCollection = logsCollection ?? throw new ArgumentNullException(nameof(logsCollection));
+        }
+
+        public void ImportFile(IEnumerable<string> paths, int minSeverity = int.MaxValue)
         {
             foreach (var path in paths)
             {
@@ -21,7 +29,7 @@ namespace AxiomaTask
                     while (csv.Read())
                     {
                         var record = csv.GetRecord<Record>();
-                        LogsCollection.LogsRecords.Add(record);
+                        _logsCollection.LogsRecords.Add(record);
 
                         if (record.severity <= minSeverity)
                         {
@@ -31,7 +39,7 @@ namespace AxiomaTask
                 }
             }
 
-            LogsCollection.LogsRecords = LogsCollection.LogsRecords.Distinct(new RecordsComparer()).ToList();
+            _logsCollection.LogsRecords = _logsCollection.LogsRecords.Distinct(new RecordsComparer()).ToList();
         }
     }
 }

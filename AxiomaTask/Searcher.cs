@@ -4,16 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AxiomaTask.Dto;
+using AxiomaTask.Interface;
 using AxiomaTask.Models;
 using AxiomaTask.ValueObjects;
 
 namespace AxiomaTask
 {
-    static internal class Searcher
+    public class Searcher: ISearcher
     {
-        internal static SearchResult? Search(string query, Func<string, ParseResult> parser)
+        private readonly IQParser _qParser;
+        private readonly IExpressionBuilder _expressionBuilder;
+        private readonly ILogsCollection _logsCollection;
+
+        public Searcher( IQParser qParser, IExpressionBuilder expressionBuilder, ILogsCollection logsCollection ) 
         {
-            var parserResult = parser(query);
+            _qParser = qParser ?? throw new ArgumentNullException(nameof( qParser));
+            _expressionBuilder = expressionBuilder ?? throw new ArgumentNullException( nameof( expressionBuilder));
+            _logsCollection = logsCollection ?? throw new ArgumentNullException(nameof(logsCollection));
+        }
+
+        public SearchResult? Search(string query)
+        {
+            var parserResult = _qParser.QueryParser(query);
 
             if (parserResult == null)
             {
@@ -28,8 +40,8 @@ namespace AxiomaTask
 
             Record[] results;
 
-            var func = ExpressionBuilder.GetExpression<Record>(new List<ParseResult>() { parser(query) });
-            results = LogsCollection.LogsRecords.Where(func).ToArray();
+            var func = _expressionBuilder.GetExpression<Record>(new List<ParseResult>() { parserResult });
+            results = _logsCollection.LogsRecords.Where(func).ToArray();
 
             return
                 new SearchResult

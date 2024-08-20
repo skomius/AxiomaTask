@@ -4,14 +4,17 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using AxiomaTask.Interface;
 using AxiomaTask.ValueObjects;
 using Newtonsoft.Json.Linq;
 
 namespace AxiomaTask
 {
-    internal static class QParser
+    public class QParser: IQParser
     {
-        static internal ParseResult QueryParser(string query)
+        public QParser() {}
+
+        public ParseResult QueryParser(string query)
         {
             var parsedField = query.Split('=');
 
@@ -44,7 +47,7 @@ namespace AxiomaTask
             }
         }
 
-        static Operator ValueParser(string value)
+        Operator ValueParser(string value)
         {
             Operator opr = (value.StartsWith('*'), value.EndsWith('*')) switch
             {
